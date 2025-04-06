@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,6 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PanTree"
         tools:targetApi="31">
+        <activity
+            android:name=".AddNewIngredientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyIngredientsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewSavedRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyRecipesActivity"
+            android:exported="false" />
+        <activity android:name=".ViewRecipeResultsActivity" />
+        <activity
+            android:name=".SearchResultsActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

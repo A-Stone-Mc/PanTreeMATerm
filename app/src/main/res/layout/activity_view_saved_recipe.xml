@@ -5,6 +5,76 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/secondbg"
     tools:context=".ViewSavedRecipeActivity">
+
+    <WebView
+        android:id="@+id/savedRecipeWebView"
+        android:layout_width="333dp"
+        android:layout_height="317dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/savedRecipeTitleText"
+        app:layout_constraintVertical_weight="1">
+
+    </WebView>
+
+    <TextView
+        android:id="@+id/savedRecipeTitleText"
+        android:layout_width="241dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="40dp"
+        android:text="Recipe Title"
+        android:textAlignment="center"
+        android:textColor="@color/ic_launcher_background"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/unsaveBtn"
+        android:layout_width="145dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/ic_launcher_background"
+        android:text="Unsave"
+        android:textColor="#88FDA8"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/savedRecipeWebView" />
+
+    <Button
+        android:id="@+id/savedShareBtn"
+        android:layout_width="145dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/ic_launcher_background"
+        android:text="Share"
+        android:textColor="#88FDA8"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/savedRecipeWebView" />
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="225dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="148dp"
+        android:backgroundTint="@color/ic_launcher_background"
+        android:text="View in Text/ Edit"
+        android:textColor="#88FDA8"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/savedRecipeWebView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

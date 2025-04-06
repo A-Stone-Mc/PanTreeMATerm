@@ -1,20 +1,35 @@
 package com.example.pantree
 
+import android.content.Context
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class AddNewIngredientActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_add_new_ingredient)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val input = findViewById<EditText>(R.id.ingredientInput)
+        val addBtn = findViewById<Button>(R.id.addIngredientBtn)
+
+        addBtn.setOnClickListener {
+            val newIngredient = input.text.toString().trim()
+
+            if (newIngredient.isNotEmpty()) {
+                val prefs = getSharedPreferences("ingredients", Context.MODE_PRIVATE)
+                val ingredientSet = prefs.getStringSet("myIngredients", mutableSetOf())!!.toMutableSet()
+                ingredientSet.add(newIngredient)
+                prefs.edit().putStringSet("myIngredients", ingredientSet).apply()
+
+                Toast.makeText(this, "Ingredient added!", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, "Please enter an ingredient", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
