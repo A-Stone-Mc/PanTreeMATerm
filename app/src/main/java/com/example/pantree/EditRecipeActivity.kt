@@ -1,6 +1,11 @@
 package com.example.pantree
 
+import android.content.Context
 import android.os.Bundle
+import android.print.PrintManager
+import android.util.Log
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -11,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
+import java.io.FileOutputStream
 
 class EditRecipeActivity : AppCompatActivity() {
 
@@ -25,6 +31,7 @@ class EditRecipeActivity : AppCompatActivity() {
         val titleView = findViewById<TextView>(R.id.editRecipeTitleText)
         val ingredientsInput = findViewById<EditText>(R.id.editIngredientsText)
         val directionsInput = findViewById<EditText>(R.id.editDirectionsText)
+        val printBtn = findViewById<Button>(R.id.printButton)
 
         val prefs = getSharedPreferences("editedRecipes", MODE_PRIVATE)
         val savedIngredients = prefs.getString("${recipeUrl}_ingredients", null)
@@ -57,6 +64,54 @@ class EditRecipeActivity : AppCompatActivity() {
                 ingredientsInput.setText(ingredientText)
                 directionsInput.setText(directionText)
             }
+        }
+
+        //print function from stackOverflow
+        printBtn.setOnClickListener {
+            Log.d("PrintDebug", "Print button clicked")
+
+            val ingredientsHtml = ingredientsInput.text.toString()
+                .split("\n")
+                .filter { it.isNotBlank() }
+                .joinToString("\n") { "<li>${it.trim()}</li>" }
+
+            val directionsHtml = directionsInput.text.toString()
+                .split(Regex("(?i)(step\\s\\d+:)"))
+                .filter { it.trim().isNotEmpty() }
+                .joinToString("\n") { "<li>${it.trim()}</li>" }
+
+            val fullText = """
+    <h2>Ingredients</h2>
+    <ul>$ingredientsHtml</ul>
+    <h2>Directions</h2>
+    <ol>$directionsHtml</ol>
+""".trimIndent()
+
+            val html = """
+        <html>
+        <body style='padding: 20px; font-family: sans-serif;'>
+            $fullText
+        </body>
+        </html>
+    """.trimIndent()
+
+            val webView = WebView(this)
+            webView.settings.javaScriptEnabled = false
+
+
+            webView.webViewClient = object : WebViewClient() {
+                override fun onPageFinished(view: WebView, url: String?) {
+                    Log.d("PrintDebug", "WebView finished loading, starting print")
+
+                    val printManager = getSystemService(Context.PRINT_SERVICE) as PrintManager
+                    val printAdapter = webView.createPrintDocumentAdapter("PanTree_Recipe")
+
+                    printManager.print("PanTree Recipe", printAdapter, null)
+                }
+            }
+
+
+            webView.loadDataWithBaseURL(null, html, "text/HTML", "UTF-8", null)
         }
 
         findViewById<Button>(R.id.saveEditButton).setOnClickListener{
