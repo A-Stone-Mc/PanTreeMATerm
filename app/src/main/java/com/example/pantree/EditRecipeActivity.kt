@@ -48,6 +48,7 @@ class EditRecipeActivity : AppCompatActivity() {
 
         titleView.text = title
 
+        //parsing technique from youtube
         lifecycleScope.launch(Dispatchers.IO) {
             val doc = Jsoup.connect(recipeUrl).get()
 

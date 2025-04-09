@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         "https://www.allrecipes.com/recipe/14554/sirloin-steak-with-garlic-butter/",
         "https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/",
         "https://www.allrecipes.com/recipe/239682/easy-tacos/",
-        "https://www.allrecipes.com/recipe/7255/dirt-cake-i/",
+        "https://www.allrecipes.com/recipe/7995/oreo-cookie-cake/",
         "https://www.allrecipes.com/recipe/258809/zucchini-noodles-with-chicken-and-tomatoes-in-a-lemon-garlic-sauce/"
     )
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             "sirloin-steak-with-garlic-butter" to "https://www.allrecipes.com/thmb/o00RDjn4K5Z235fmRj5_Ipb__no=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AR-14554-sirloin-steak-with-garlic-butter-step-01-4x3-ddaf9100f4114e9db7ea49152c522676.jpg",
             "best-chocolate-chip-cookies" to "https://www.allrecipes.com/thmb/Bdf8n6bFxfQQAA-4GojXzqQRVJw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/best-chocolate-chip-cookies-allrecipes-video-10813-4x3-9298be03a9a845989bd7c5457c9fa60d.jpg",
             "easy-tacos" to "https://www.allrecipes.com/thmb/9XUapVzHHmGFubC1JQ7x3LMd2n0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8134094-74bd37f5df634c9c9b323db0dfbb93ad.jpg",
-            "dirt-cake-i" to "https://www.allrecipes.com/thmb/pZnXugfOqo9KOfWYkgdj5s2y20o=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/7255-dirt-cake-ddmfs-3X4-1858-121f5174119245aeb2cbd9cc024dc5c9.jpg",
+            "oreo-cookie-cake" to "https://www.allrecipes.com/thmb/pZnXugfOqo9KOfWYkgdj5s2y20o=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/7255-dirt-cake-ddmfs-3X4-1858-121f5174119245aeb2cbd9cc024dc5c9.jpg",
             "zucchini-noodles-with-chicken-and-tomatoes-in-a-lemon-garlic-sauce" to "https://www.allrecipes.com/thmb/A1pwl5FDl7CI60ZjDQiRnx2pR1w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8093578-7a9c514f4df84d2db00fdc4e494f5c18.jpg"
 
         )
