@@ -69,7 +69,7 @@ class SearchResultsActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     if (titlesAndLinks.isEmpty()) {
                         val noResultText = TextView(this@SearchResultsActivity)
-                        noResultText.text = "No recipes found."
+                        noResultText.text = "No recipes found. Check the spelling on your ingredients or the meal/food that you searched for. If searching by ingredients, try removing unique ingredients from list."
                         resultsContainer.addView(noResultText)
                     } else {
                         for ((title, link) in titlesAndLinks) {
@@ -90,7 +90,7 @@ class SearchResultsActivity : AppCompatActivity() {
                 e.printStackTrace()
                 withContext(Dispatchers.Main) {
                     val errorText = TextView(this@SearchResultsActivity)
-                    errorText.text = "Error loading recipes."
+                    errorText.text = "Error loading recipes. Check your spelling or internet connection"
                     resultsContainer.addView(errorText)
                 }
             }
