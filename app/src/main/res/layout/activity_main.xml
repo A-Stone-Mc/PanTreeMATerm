@@ -108,17 +108,23 @@
             android:id="@+id/recipeThumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#FDF9FC"
+            android:backgroundTint="@color/ic_launcher_background"
             app:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/recipeCardTitle"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="42dp"
+            android:background="#452F19"
+            android:backgroundTint="@color/ic_launcher_background"
             android:text="Title"
             android:textAlignment="center"
-            android:textColor="@color/ic_launcher_background"
+            android:textColor="#88FDA8"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="-92dp"
+            tools:layout_editor_absoluteY="528dp" />
 
     </com.google.android.material.card.MaterialCardView>
 
