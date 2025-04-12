@@ -37,6 +37,34 @@ class EditRecipeActivity : AppCompatActivity() {
         val savedIngredients = prefs.getString("${recipeUrl}_ingredients", null)
         val savedDirections = prefs.getString("${recipeUrl}_directions", null)
 
+        if (!savedIngredients.isNullOrBlank() || !savedDirections.isNullOrBlank()) {
+            //use saved text
+            ingredientsInput.setText(savedIngredients ?: "")
+            directionsInput.setText(savedDirections ?: "")
+        } else {
+
+            //parsing technique from youtube
+            lifecycleScope.launch(Dispatchers.IO) {
+                val doc = Jsoup.connect(recipeUrl).get()
+
+                val ingredients =
+                    doc.select("li.mm-recipe-ingredients__list-item, li.mm-recipes-structured-ingredients__list-item")
+                        .map { it.text().trim() }
+
+                val directions = doc.select("li.comp.mntl-sc-block-group--LI p")
+                    .map { it.text().trim() }
+
+                val ingredientText = ingredients.joinToString("\n") { "- $it" }
+                val directionText =
+                    directions.mapIndexed { i, step -> "Step ${i + 1}: $step" }.joinToString("\n\n")
+
+                withContext(Dispatchers.Main) {
+                    ingredientsInput.setText(ingredientText)
+                    directionsInput.setText(directionText)
+                }
+            }
+        }
+
         if (savedIngredients != null || savedDirections != null) {
             ingredientsInput.setText(savedIngredients ?: "")
             directionsInput.setText(savedDirections ?: "")
@@ -48,24 +76,6 @@ class EditRecipeActivity : AppCompatActivity() {
 
         titleView.text = title
 
-        //parsing technique from youtube
-        lifecycleScope.launch(Dispatchers.IO) {
-            val doc = Jsoup.connect(recipeUrl).get()
-
-            val ingredients = doc.select("li.mm-recipe-ingredients__list-item, li.mm-recipes-structured-ingredients__list-item")
-                .map { it.text().trim() }
-
-            val directions = doc.select("li.comp.mntl-sc-block-group--LI p")
-                .map { it.text().trim() }
-
-            val ingredientText = ingredients.joinToString("\n") { "- $it" }
-            val directionText = directions.mapIndexed { i, step -> "Step ${i + 1}: $step" }.joinToString("\n\n")
-
-            withContext(Dispatchers.Main) {
-                ingredientsInput.setText(ingredientText)
-                directionsInput.setText(directionText)
-            }
-        }
 
         //print function from stackOverflow
         printBtn.setOnClickListener {
