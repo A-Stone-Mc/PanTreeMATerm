@@ -4,6 +4,8 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
@@ -36,6 +38,49 @@ class ViewRecipeResultsActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.shareBtn).setOnClickListener {
             shareRecipe(recipeUrl)
+        }
+
+        val maximizeBtn = findViewById<Button>(R.id.maximizeBtn)
+        val minimizeBtn = findViewById<Button>(R.id.minimizeBtn)
+
+
+        val titleView = findViewById<TextView>(R.id.recipeTitleText)
+        val saveBtn = findViewById<Button>(R.id.saveBtn)
+        val shareBtn = findViewById<Button>(R.id.shareBtn)
+
+        maximizeBtn.setOnClickListener {
+            maximizeBtn.visibility = View.GONE
+            minimizeBtn.visibility = View.VISIBLE
+
+            titleView.visibility = View.GONE
+            saveBtn.visibility = View.GONE
+            shareBtn.visibility = View.GONE
+
+
+            val params = webView.layoutParams as ViewGroup.MarginLayoutParams
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT
+            params.topMargin = 0  // remove the top margin
+            webView.layoutParams = params
+            webView.requestLayout()
+        }
+
+        minimizeBtn.setOnClickListener {
+            maximizeBtn.visibility = View.VISIBLE
+            minimizeBtn.visibility = View.GONE
+
+            titleView.visibility = View.VISIBLE
+            saveBtn.visibility = View.VISIBLE
+            shareBtn.visibility = View.VISIBLE
+
+
+            val density = resources.displayMetrics.density
+            val params = webView.layoutParams as ViewGroup.MarginLayoutParams
+            params.height = (317 * density).toInt()
+            params.width = (333 * density).toInt()
+            params.topMargin = (150 * density).toInt()
+            webView.layoutParams = params
+            webView.requestLayout()
         }
     }
 

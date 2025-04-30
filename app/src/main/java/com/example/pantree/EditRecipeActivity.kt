@@ -53,6 +53,7 @@ class EditRecipeActivity : AppCompatActivity() {
 
                 val directions = doc.select("li.comp.mntl-sc-block-group--LI p")
                     .map { it.text().trim() }
+                    .filterNot { it.contains("Dotdash Meredith Food Studios", ignoreCase = true) } //filter out any watermarks left by specific creator
 
                 val ingredientText = ingredients.joinToString("\n") { "- $it" }
                 val directionText =
@@ -87,9 +88,14 @@ class EditRecipeActivity : AppCompatActivity() {
                 .joinToString("\n") { "<li>${it.trim()}</li>" }
 
             val directionsHtml = directionsInput.text.toString()
-                .split(Regex("(?i)(step\\s\\d+:)"))
-                .filter { it.trim().isNotEmpty() }
-                .joinToString("\n") { "<li>${it.trim()}</li>" }
+                .split(Regex("(?i)(step\\s\\d+:)"))  // split at Step X:
+                .map { it.trim() }
+                .filter {
+                    it.isNotBlank() &&
+                            !it.equals("Dotdash Meredith Food Studios", ignoreCase = true) &&  //filtering out an error I found when parsing
+                            !it.contains("Dotdash Meredith Food Studios", ignoreCase = true)
+                }
+                .joinToString("\n") { "<li>$it</li>" }
 
             val fullText = """
     <h2>Ingredients</h2>

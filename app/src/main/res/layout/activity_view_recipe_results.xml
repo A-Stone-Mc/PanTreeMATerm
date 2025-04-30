@@ -60,4 +60,30 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/savedRecipeWebView" />
+
+    <Button
+        android:id="@+id/maximizeBtn"
+        android:layout_width="60dp"
+        android:layout_height="46dp"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/ic_launcher_background"
+        android:text="⛶"
+        android:textColor="#88FDA8"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/savedRecipeWebView"
+        app:layout_constraintTop_toBottomOf="@id/savedRecipeWebView" />
+
+    <Button
+        android:id="@+id/minimizeBtn"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/ic_launcher_background"
+        android:text="-"
+        android:textColor="#88FDA8"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
